@@ -1,0 +1,31 @@
+server:
+  port: 19093
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/msa_exam
+    username: root
+    password: Jesuslove1!
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      consume: b3
+      produce: b3_multi
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
+
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-},%X{spanId:-}]"
+message: "product-service-local message update"
